@@ -35,9 +35,14 @@ void BFS(GRAPH graph){
         for(/* 인접 노드들 모두 둘러보기 */){
             if(check[/* 인접 노드의 index */] == 0){
                 q.push(/*방문하지 않은 인접 노드*/); // 방문하지 않은 인접 노드를 Queue에 담음
-                check[/* 인접 노드의 index */] = check[cur.index] + 1;// 방문 처리
+                check[/* 인접 노드의 index */] = check[cur.index] + 1;// 방문 처리 : true or false로 처리할 수 있지만 지금은 깊이 정보 저장
             }
         }
     }
 }
 ```
+* * *
+시간복잡도
+---
+* 인접 리스트로 표현된 그래프 : *O(V + E)*
+* 행렬로 표현된 그래프 : *O(N^2)*
