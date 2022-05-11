@@ -5,3 +5,4 @@ Alogrithm
 * BFS
 * DFS
 * Asymptotic notation
+* Divide and Conquer
