@@ -8,3 +8,6 @@ Alogrithm
 * Divide and Conquer
 * Dynamic Programming
 * Greedy Algorithm
+* Minimum Spanning Trees
+    * Kruskal's algorithm
+    * Prim's algorithm
