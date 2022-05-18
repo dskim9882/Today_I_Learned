@@ -10,5 +10,8 @@
     * Kruskal's algorithm
     * Prim's algorithm
 * Shortest-paths Problem
+    * Bellman-Ford Algorithm
+    * Dijkstra's Algorithm
+    * Single-Source Shortest Paths in Directed Acyclic Graph
 ## Data Structure
 * Union-Find (Disjoint-Set)
