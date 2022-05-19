@@ -13,5 +13,6 @@
     * Bellman-Ford Algorithm
     * Dijkstra's Algorithm
     * Single-Source Shortest Paths in Directed Acyclic Graph
+    * Floyd-Warshall Algorithm
 ## Data Structure
 * Union-Find (Disjoint-Set)

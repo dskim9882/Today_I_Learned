@@ -103,7 +103,7 @@ Dijkstra(G, w, s)
         for each vertex v ∈ G.Adj[u]
             Relax(u, v, w)
 ```
-* 시간 복잡도 : O(V+E)
+* 시간 복잡도 : O(VlgV+E)
 
 ## Single-Source Shortest-path in a Directed Acyclic Graph(DAC)
 1. DAC의 모든 vertex를 위상 정렬 (topological sort) 
@@ -116,4 +116,21 @@ DAG_Shortest_Path(G, w, s)
     for each vertex u, taken in topologically sorted order
         for each vertex v ∈ G.Adj[u]
             Relax(u, v, w)
-```
+``` 
+## Floyd-Warshall Algorithm
+* All-pairs Shortest-paths
+    * |V| = n이라고 했을 때, shortest-path distances를 저장할 n X n matrix D = (d<sub>ij</sub>)를 만든다.
+    * d<sub>ij</sub> = &delta;(i, j) for all vertices i and j
+* Dynamic-programming apporach
+* Negative-weight edges는 존재할 수 있으나, negative-weight cycles은 없다고 본다.
+* 거쳐가는 vertex(intermediate vertex)를 기준으로 shortest path를 구한다.
+* d<sub>ij</sub><sup>(k)</sup> = shortest-path weight of any path i ~> j with all intermediate vertices in {1, 2, ..., k}
+> d<sub>ij</sub><sup>(k)</sup> =
+>> w<sub>ij</sub>, if k = 0,</br>
+ min(d<sub>ij</sub><sup>(k-1)</sup>, d<sub>ik</sub><sup>(k-1)</sup> + d<sub>kj</sub><sup>(k-1)</sup>), if k &ge; 1.
+</br>
+* &pi;<sub>ij</sub><sup>(k)</sup> = predecessor of vertex j on a shortest path from vertex i with all intermediate vertices in {1, 2, ..., k}
+> &pi;<sub>ij</sub><sup>(k)</sup> =
+>> &pi;<sub>ij</sub><sup>(k-1)</sup>, if d<sub>ij</sub><sup>(k-1)</sup> &le; d<sub>ik</sub><sup>(k-1)</sup> + d<sub>kj</sub><sup>(k-1)</sup>,</br>
+&pi;<sub>kj</sub><sup>(k-1)</sup>, if d<sub>ij</sub><sup>(k-1)</sup> > d<sub>ik</sub><sup>(k-1)</sup> + d<sub>kj</sub><sup>(k-1)</sup>.
+</br>
