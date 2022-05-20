@@ -15,4 +15,5 @@
     * Single-Source Shortest Paths in Directed Acyclic Graph
     * Floyd-Warshall Algorithm
 ## Data Structure
+* Heap
 * Union-Find (Disjoint-Set)
