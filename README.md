@@ -16,6 +16,7 @@
     * Floyd-Warshall Algorithm
 ## Data Structure
 * Stack
+* Queue
 * Heap
 * Union-Find (Disjoint-Set)
 ## References

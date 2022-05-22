@@ -1,4 +1,4 @@
-# Heap
+# ***Heap***
 ## 정의
 왼쪽과 오른쪽의 subtrees가 그들의 parents보다 작은(Max Heap)/큰(Min Heap) 값을 가지는 binary tree이다. 최댓/최솟값을 빠르게 찾아내기 위해 고안된 완전 이진트리 자료구조이다. Binary heap이라고도 한다.
 ## 종류

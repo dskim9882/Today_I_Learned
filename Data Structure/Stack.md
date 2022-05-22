@@ -1,4 +1,4 @@
-# Stack
+# ***Stack***
 ## 정의
 Top이라고 불리는 한 쪽 끝에서 데이터의 삽입 삭제가 이루어지는 자료구조이다. Last in-First out(LIFO)의 성격을 가진다.
 ## Operations
@@ -85,7 +85,7 @@ fullStack(Stack)
 ### Stack Count
 Stack의 데이터 개수를 반환한다.
 ```
-emptyStack(Stack)
+stackCount(Stack)
     return stack count
 ```
 ### Destroy Stack
