@@ -17,6 +17,7 @@
 ## Data Structure
 * Stack
 * Queue
+* General Linear List
 * Heap
 * Union-Find (Disjoint-Set)
 ## References
