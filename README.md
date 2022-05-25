@@ -19,6 +19,7 @@
 * [Queue](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/Queue.md)
 * [General Linear List](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/General_Linear_List.md)
 * [Tree](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/Tree.md)
+* [Binary Search Tree](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/Binary_Search_Tree.md)
 * [Heap](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/Heap.md)
 * [Union-Find (Disjoint-Set)](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/Union_Find.md)
 ## References
