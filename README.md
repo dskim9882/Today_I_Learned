@@ -31,6 +31,11 @@
     * class
     * interface
     * null safety
+* [Collection](https://github.com/dskim9882/Today_I_Learned/blob/master/Kotlin/Collection.md)
+    * List
+    * Map
+    * Set
+* [Lambda Expression](https://github.com/dskim9882/Today_I_Learned/blob/master/Kotlin/Lambda_Expression.md)
 ## References
 * *Richard F. Gilberg & Behrouz A. Forouzan. (2004). Data Structures: A Pseudocode Approach with C(2nd ed.). Course Technology.*
 * *Thomas H. Cormen & Charles E. Leiserson & Ronald L. Rivest & Clifford Stein. (2009). Introduction to Algorithms (3rd ed.). MIT Press*
