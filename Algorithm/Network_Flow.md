@@ -95,3 +95,30 @@ cut (S, T) of flow network G = (V, E)는 V를 S와 T = V - S로 나누는 것이
  * while 문이 한번 반복될 때마다 flow value가 최소 1 단위 오른다고 생각하면, while문은 최대 |*f**| 반복된다. 
  * residual network에서 path를 찾는 데에 *O(E)* 만큼 걸린다.
  * total running time은 *O*(*E* |*f**|)이다.
+
+ ## Edmonds-Karp Algorithm
+ Ford-Fulkerson method의 구현 중 하나이다. Ford-Fulkerson method의 일반적인 구현의 경우, augmenting path p를 찾는 조건은 G<sub>f</sub>에서 s에서 t까지의 simple path라는 것 뿐이다. 이 경우 매우 비효율적인 선택을 할 수도 있다.
+ </br>Edmonds-Karp Alogrithm에서는 augmenting path p를 찾는 조건으로 edges의 개수가 가장 적은, 즉, BFS를 통해 찾을 수 있는 shortest path를 추가했다. 이 알고리즘의 시간 복잡도는 *O(VE<sup>2</sup>)* 이다.
+
+ <center><img src="https://user-images.githubusercontent.com/78060320/171989997-79cfec8d-5861-4e6f-a55b-2ffaf45c1de2.png" width="100%" height="100%"></center>
+
+ ## Maximum bipartite matching
+ Ford-Fulkerson method로 풀이 가능한 문제이다.
+ ### The maximum-bipartite-matching problem
+ undirected graph *G* = (*V, E*) 가 주어진다.
+* matching M
+    * M &sube; E
+    * 모든 vertices v &isin; V에 대해서, M의 최대 하나의 edge가 is incident on v 이다.
+* 만약 matching M의 몇몇 edge가 is incident on v &isin; V라면, v는 matched라고 한다. 아니라면, free 혹은 unmatched라고 한다.
+* maximum matching
+    * 어떠한 다른 matching M'보다 matching M이 원소가 많을 때, 즉, |M| &ge; |M'|일 때, matching M은 maximum matching이다.
+* bipartite graph
+    * V = L &cup; R
+    * L &cap; R = &empty;
+    * 모든 edge가 L과 R 사이에 있다.
+    * 그래프가 bipartite이다. *if and only if* 그래프에 홀수 length의 cycle이 없다.
+### Finding a maximum bipartite matching
+* the corresponding flow network *G'* = (*V', E'*)
+    * *V' = V &cup; {s, t}*
+    * *E' = {(s,u) : u &isin; L} &cup; {(u,v) : (u,v) &isin; E} &cup; {(v,t) : v &isin; R}* 
+* edge 마다 capacity를 1로 설정하고 Ford-Fulkerson 적용하여 문제 해결 
