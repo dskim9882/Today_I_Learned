@@ -46,3 +46,39 @@ A 문제를 B문제로 환원(reducing)함으로써 A의 easiness를 증명하�
 
 #### A first NP-Complete problem
 Reduction은 어떤 NP-Complete problem을 증명하기 위해서 이미 NP-Complete라고 알려진 문제를 갖는 것에 의존하기 때문에, "first" NP-Complete 문제가 필요하다.
+
+## Polynomial time
+### 개념 정리
+#### ***Abstract problems***
+abstract problem Q : a binary relation a set *I* of ***instances*** and a set S of problem ***solutions*** 
+* 예시 - SHORTEST-PATH
+    * instance : 그래프와, 두 vertices
+    * solution : 그래프의 vertices로 이루어진 sequence
+    * 주어지는 instance는 shortest-path가 유일하지 않을 수 있으므로 하나 이상의 solution을 가질 수 있다.
+
+abstract ***decision problem*** : instance set *I* 가 solution set {0, 1}에 매핑된다.
+</br>
+많은 abstract problems는 decision problems이 아니라, optimization problems이다. 하지만 optimization 문제를 decision 문제로 바꾸는 건 그렇게 어렵지 않다.
+
+#### ***Encodings***
+컴퓨터가 abstract problem을 풀기 위해서는 problem instances를 프로그램이 이해할 수 있도록 표현해야 한다.
+</br>
+
+Encoding of a set S of abstract objects : a mapping *e* from S to the set of binary strings
+</br>
+***concrete problem*** : instance set이 binary strings의 set인 문제
+</br>
+길이가 n인 instance i를 가진 concrete problem를 상수 k에 대해 *O(n<sup>k</sup>)* 의 시간 안에 풀 수 있는 알고리즘이 있다면, 해당 concrete problem은 ***polynomial-time solvable***이다.
+</br>
+</br>
+***the complexity class P*** : the set of concrete decision problems that are polynomial-time solvable
+</br>
+</br>
+우리는 abstract problems를 concrete problems으로 매핑하기 위해 encoding을 사용할 수 있다.
+</br>
+abstract decision problem Q는 instance *I*가 {0, 1}에 매핑되어 있다. Encoding e : *I* &rarr; {0, 1}<sup>*</sup> 는 related concrete problem *e(Q)* 를 만든다. 
+</br>
+*e<sub>1</sub>* 과 *e<sub>2</sub>* 가 polynomially related encodings on *I*일 때, *e<sub>1</sub>(Q) &isin; P &harr; e<sub>2</sub>(Q) &isin; P* 이다.
+</br>
+</br>
+The standard encoding of an object는 \<>로 감싸서 표현한다. 예를 들어 그래프 G의 standard encoding은 \<G>이다.
