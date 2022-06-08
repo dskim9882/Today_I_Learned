@@ -26,6 +26,7 @@
 * [Tree](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/Tree.md)
 * [Binary Search Tree](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/Binary_Search_Tree.md)
 * [Heap](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/Heap.md)
+* [Graph](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/Graph.md)
 * [Union-Find (Disjoint-Set)](https://github.com/dskim9882/Today_I_Learned/blob/master/Data%20Structure/Union_Find.md)
 ## Kotlin
 * [Basic Grammar](https://github.com/dskim9882/Today_I_Learned/blob/master/Kotlin/Basic_Grammar.md)
