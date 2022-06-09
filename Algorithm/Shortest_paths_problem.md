@@ -43,8 +43,9 @@ init_Single_Source(G, s)
         v.&pi; = NIL
     s.d = 0
 ```
-* V<sub>&pi;</sub> = {v∈V: v.&pi; != NIL} ∪ {s}, E<sub>&pi;</sub> = {(v.&pi;, v)∈E: v ∈ V.&pi - {s}}
+* V<sub>&pi;</sub> = {v∈V: v.&pi; != NIL} ∪ {s}, E<sub>&pi;</sub> = {(v.&pi;, v)∈E: v ∈ V.&pi; - {s}}
 * the predecessor subgraph G<sub>&pi;</sub> = (V<sub>&pi;</sub>, E<sub>&pi;</sub>)
+* 종료 시점에서, G<sub>&pi;</sub> 는 shortest-path tree이다.
 * Relaxation
     * edge (u, v)에 대해서 기존의 shortest-path보다 개선할 수 있는지 판단하고 개선이 가능하다면, 그에 맞게 v.d와 v.&pi;를 업데이트 시켜주는 것
 ```
@@ -89,6 +90,8 @@ Bellman-Ford(G, w, s)
             return false
     return true
 ```
+<center><img src="https://user-images.githubusercontent.com/78060320/172772850-1e7c7f16-d1c3-402e-a92b-9799e5bb3b27.png" width="100%" height="100%"></center>
+
 ## Dijkstra's Algorithm
 negative-weight edges가 없을 때 사용할 수 있는 Greedy algorithm이다.
 </br>BFS의 weighted version으로, FIFO queue 대신 priority queue를 사용한다. Key 값은 shortest-path weights(v.d)이다.
@@ -103,11 +106,14 @@ Dijkstra(G, w, s)
         for each vertex v ∈ G.Adj[u]
             Relax(u, v, w)
 ```
-* 시간 복잡도 : O(VlgV+E)
+* 시간 복잡도 
+    * Binary Heap : 모든 연산이 *O(lgV)* 가 걸린다. 따라서 *O((V + E)lgV)* 이다.
+    * Fibonacci Heap : Relax에서 사용되는 DECREASE-KEY 연산이 *O(1)* 이 걸린다. 따라서 *O(VlgV + E)* 이다.
+<center><img src="https://user-images.githubusercontent.com/78060320/172781252-8102f115-2682-4bbd-9d30-f2d2cdfb516d.png" width="100%" height="100%"></center>
 
 ## Single-Source Shortest-path in a Directed Acyclic Graph(DAC)
-1. DAC의 모든 vertex를 위상 정렬 (topological sort) 
-2. 시작 vertex부터 인접한 vertices들과 relaxation을 진행한다.
+1. DAC의 모든 vertex를 위상 정렬 ([topological sort](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/Topological_Sort.md)) 
+2. 시작 vertex부터 인접한 vertices들과 차례로 relaxation을 진행한다.
 * Directed Acyclic Graph 자체가 negative-weight cycle이 없다는 것을 보장한다.
 ```
 DAG_Shortest_Path(G, w, s)
@@ -134,3 +140,55 @@ DAG_Shortest_Path(G, w, s)
 >> &pi;<sub>ij</sub><sup>(k-1)</sup>, if d<sub>ij</sub><sup>(k-1)</sup> &le; d<sub>ik</sub><sup>(k-1)</sup> + d<sub>kj</sub><sup>(k-1)</sup>,</br>
 &pi;<sub>kj</sub><sup>(k-1)</sup>, if d<sub>ij</sub><sup>(k-1)</sup> > d<sub>ik</sub><sup>(k-1)</sup> + d<sub>kj</sub><sup>(k-1)</sup>.
 </br>
+
+<center><img src="https://user-images.githubusercontent.com/78060320/172846181-211eee3e-c391-4342-b598-42c04462d49a.png" width="100%" height="100%"></center>
+<center><img src="https://user-images.githubusercontent.com/78060320/172846271-25d61a9f-5db3-4250-893c-0ee0a805a2dd.png" width="100%" height="100%"></center>
+
+```
+Floyd-Warshall(W)
+    n = W.rows
+    D[0] = W
+    for k = 1 to n
+        let D[k] = d[k] be a new n X n matrix
+        for i = 1 to n
+            for j = 1 to n
+                d[k][i][j] = min(d[k-1][i][j], d[k-1][i][k] + d[k-1][k][j])
+    return D[n]
+
+Print-All-Shortest-Path(PI, i, j)
+    if i == j
+        print i
+    elseif pi[i][j] == NIL
+        print "no path from " i "to" j "exists"
+    else Print-All-Shortest-Path(PI, i, pi[i][j])
+        print j
+```
+
+### Transitive Closure (이행적 폐쇄)
+DAG의 인접 관계에 대한 이행적 폐쇄는 도달 가능 관계를 나타낸다. 
+* Input으로 DAG *G* = (*V, E*)를 받았다고 하자. 
+* 이행적 폐쇄 알고리즘을 실행하면 output으로 *G<sup>\*</sup>* = (*V, E<sup>\*</sup>*)를 도출해낼 수 있다.
+* 이때 *E<sup>\*</sup>* = {(i, j) : G에 path i ~> j가 존재한다.} 이다.
+
+Floyd-Warshall algorithm에서 몇 가지만 수정하면 Transitive closure 문제를 해결할 수 있다.
+* 각 edge의 weight를 1로 할당한다
+* unweighted adjacency matrix를 사용한다.
+* min 함수 대신 OR 연산자를 사용한다.
+* \+ 대신 AND 연산자를 사용한다.
+```
+Transitive-Closure(G)
+    n = |G.V|
+    let T[0] = (t[0]) be a new n X n matrix
+    for i = 1 to n
+        for j = 1 to n
+            if i == j or (i, j) ∈ G.E
+                t[0][i][j] = 1
+            else 
+                t[0][i][j] = 0
+    for k = 1 to n
+        let T[k] = (t[k]) be a new n X n matrix
+        for i = 1 to n
+            for j = 1 to n
+                t[k][i][j] = t[k-1][i][j] OR (t[k-1][i][k] AND t[k-1][k][j])
+    return T[n]
+```

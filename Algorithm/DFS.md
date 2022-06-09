@@ -40,3 +40,28 @@ void DFS_visit(GRAPH graph, NODE node){
     }// 모든 인접노드 방문이 끝나면 함수를 종료하여 백트래킹
 }
 ```
+아래의 수도 코드에서는 vertex v 별로 방문 시작(v.d)/종료(v.f) time을 기록한다. 이 시간 정보는 [topological sort](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/Topological_Sort.md)에 활용될 수 있다.
+</br> 또한 WHITE = undiscover, GRAY = discover, but not finished, BLACK = finished를 의미한다.
+
+```
+DFS(G)
+    for each vertex u ∈ G.V
+        u.color = WHITE
+        u.pi = NIL
+    time = 0
+    for each vertex u ∈ G.V
+        if u.color == WHITE
+            DFS-VISIT(G, u)
+
+DFS-VISIT(G, u)
+    time = time + 1
+    u.d = time
+    u.color = GRAY
+    for each v ∈ G.Adj[u]
+        if v.color == WHITE
+            v.pi = u
+            DFS-VISIT(G, v)
+    u.color = BLACK
+    time = time + 1
+    u.f = time
+```

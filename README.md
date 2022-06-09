@@ -1,11 +1,12 @@
 # ***Today_I_Learned***
 ## Alogrithm
-* [BFS](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/BFS.md)
-* [DFS](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/DFS.md)
 * [Asymptotic notation](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/Asymptotic_Notation.md)
 * [Divide and Conquer](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/Divide_and_Conquer.md)
 * [Dynamic Programming](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/Dynamic_Programming.md)
 * [Greedy Algorithm](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/Greedy_Algorithm.md)
+* [BFS](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/BFS.md)
+* [DFS](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/DFS.md)
+* [Topological Sort](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/Topological_Sort.md)
 * [Minimum Spanning Trees](https://github.com/dskim9882/Today_I_Learned/blob/master/Algorithm/Minimum_Spanning_Trees.md)
     * Kruskal's algorithm
     * Prim's algorithm
