@@ -13,9 +13,10 @@ Directed graph *G = (V,E)* 이 주어진다.
 * Flow
     * function *f* : V X V -> **R** satisfying
         * Capacity constraint: For all u, v ∈ V, 0 &le; *f(u, v)* &le; *c(u, v)* 
-        * Flow conservation: For all u ∈ V - {s, t}, &Sigma;<sub>v∈V</sub>*f(v, u)* = &Sigma;<sub>v∈V</sub>*f(u, v)* <br/>("Flow in equals flow out.")
+        * Flow conservation: For all u ∈ V - {s, t}, &Sigma;<sub>v∈V</sub>*f(v, u)* = &Sigma;<sub>v∈V</sub>*f(u, v)* <br/>source와 sink를 제외한 vertex에 대해서 들어오는 flow의 총량과 나가는 flow의 총량은 같다.("Flow in equals flow out.")
 * flow *f*의 value, |*f*|
     * |*f*| = &Sigma;<sub>v∈V</sub>*f(s, v)* - &Sigma;<sub>v∈V</sub>*f(v, s)* = flow out of source - flow into source
+    * source에 나가는 flow들의 합에서 source로 들어오는 flow의 합을 빼면, network에 흐르는 flow의 값을 구할 수 있다.
 * Maximum flow problem
     * flow network G와, s, t, c가 주어졌을 때, G에서 최대 flow 값을 찾는 문제
 * Antiparallel edges
@@ -47,6 +48,9 @@ Residual capacity *c<sub>f</sub>(u, v)*
 >>*c(u, v) - f(u, v) if (u, v) ∈ E,*
 >>*<br/>f(v, u) if (v, u) ∈ E,*
 >>*<br/>0 otherwise.*
+
+현재 network의 edge에 흐르는 flow를 고려하여 각 edge마다의 여분의 capacity를 파악하고, 이 관계를 그래프로 나타낸다. (***Residual Network***) 이러한 여분 capacity를 통해서 source에서 sink로 flow가 더 흐를 수 있는 경로(***augmenting path***)를 파악하고 network의 edge마다 flow를 업데이트(***cancellation***)하여 전체 flow 값을 개선한다.(***Augmentation***)
+
 <center><img src="https://user-images.githubusercontent.com/78060320/171802175-2b93af96-1247-4ac6-81e5-f489d5a90c69.png" width="40%" height="40%"></center>
 
 * Residual network is *G<sub>f</sub> = (V, E<sub>f</sub>), where E<sub>f</sub> = {(u, v) ∈ V X V: c<sub>f</sub>(u, v) > 0}*
@@ -55,17 +59,26 @@ Residual capacity *c<sub>f</sub>(u, v)*
 * *(f &uarr; f')(u, v) =* 
     * *f(u, v) + f'(u, v) - f'(v, u) if (u, v)* ∈ *E*,
     * 0 otherwise.
-
+* Residual network를 통해서 edge에서 더 흐를 수 있는 flow가 있으면 더하고, 불필요한 flow가 있다면 빼어 전체 flow 값을 증가시킨다. => 이 과정을 Cancellation이라고 한다.
 ### Augmenting paths
 augmenting path *p* 는 residual network *G<sub>f</sub>* 에서의 s에서 t까지의 simple path이다. 
 * the residual capacity of *p*
     * *c<sub>f</sub>(p) = min{c<sub>f</sub>(u, v) : (u, v) is on p}*
+*  *p*의 flow 값인 |*f<sub>p</sub>*|는 *c<sub>f</sub>(p)* 의 값만큼 흐를 수 있다. (|*f<sub>p</sub>*| = *c<sub>f</sub>(p)* > 0)
+    * *f<sub>p</sub>* =
+        * *c<sub>f</sub>(p)*, if (*u, v*) is on *p*,
+        * 0, otherwise.
 ### Cuts
 cut (S, T) of flow network G = (V, E)는 V를 S와 T = V - S로 나누는 것이다. 즉, 그래프의 vertices들의 집합을 두 동강 내는 것이다.
 * flow *f*에 대해서, cut (S, T)를 가로지르는 net flow
     *  *f(S,T) = &Sigma;<sub>u ∈ S</sub>&Sigma;<sub>v ∈ T</sub> f(u, v) - &Sigma;<sub>u ∈ S</sub>&Sigma;<sub>v ∈ T</sub> f(v, u)*
+    * |*f*| = *f(S,T)* for any cut(*S, T*)
+
+<center><img src="https://user-images.githubusercontent.com/78060320/173008899-031b9c56-1505-4077-b186-98b85ce89c5f.png" width="80%" height="80%"></center>
+
 * Capacity of cut (S, T)
     * *c(S, T) =  &Sigma;<sub>u ∈ S</sub>&Sigma;<sub>v ∈ T</sub>c(u, v)*
+    * |*f*| &le; *c(S,T)* for any cut(*S, T*)
 * Minimum cut of *G*
     * capacity가 가장 작은 cut
 
@@ -111,7 +124,7 @@ cut (S, T) of flow network G = (V, E)는 V를 S와 T = V - S로 나누는 것이
     * 모든 vertices v &isin; V에 대해서, M의 최대 하나의 edge가 is incident on v 이다.
 * 만약 matching M의 몇몇 edge가 is incident on v &isin; V라면, v는 matched라고 한다. 아니라면, free 혹은 unmatched라고 한다.
 * maximum matching
-    * 어떠한 다른 matching M'보다 matching M이 원소가 많을 때, 즉, |M| &ge; |M'|일 때, matching M은 maximum matching이다.
+    * 어떤 다른 matching M'보다도 matching M이 원소가 많을 때, 즉, |M| &ge; |M'|일 때, matching M은 maximum matching이다.
 * bipartite graph
     * V = L &cup; R
     * L &cap; R = &empty;
@@ -122,3 +135,34 @@ cut (S, T) of flow network G = (V, E)는 V를 S와 T = V - S로 나누는 것이
     * *V' = V &cup; {s, t}*
     * *E' = {(s,u) : u &isin; L} &cup; {(u,v) : (u,v) &isin; E} &cup; {(v,t) : v &isin; R}* 
 * edge 마다 capacity를 1로 설정하고 Ford-Fulkerson 적용하여 문제 해결 
+### Algorithm
+* matching M에 대해서, M의 어떤 edge의 endpoint에 속하지 않는 vertex를 free 혹은 unmatched라고 한다.
+* 모든 vertex가 matched이면, M은 Maximum matching이다.
+* input은 a bipartite graph G = <V,U,E> 이다.
+
+```
+Maximum-Bipartite-Matching(G)
+    initialize set M of edges with some valid matching (e.g., the empty set)
+    initialize queue Q with all the free vertices in V (in any order)
+    while not Empty(Q) do
+        w <- Front(Q); Dequeue(Q)
+        if w ∈ V
+            for every vertex u adjacent to w do
+                if u is free
+                    M <- M U (w, u)
+                    v <- w
+                    while v is labeled do
+                        u <- vertex indicated by v's label; M <- M - (v,u)
+                        v <- vertex indicated by u's label; M <- M U (v, u)
+                    remove all vertex labels
+                    reinitialize Q with all free vertices in V
+                    break
+                else
+                    if (w, u) ∉ M and u is unlabeled
+                        label u with w
+                        Enqueue(Q,u)
+        else
+            label the mate v of w with w
+            Enqueue(Q,v)
+    return M
+```

@@ -135,7 +135,9 @@ DAG_Shortest_Path(G, w, s)
 >> w<sub>ij</sub>, if k = 0,</br>
  min(d<sub>ij</sub><sup>(k-1)</sup>, d<sub>ik</sub><sup>(k-1)</sup> + d<sub>kj</sub><sup>(k-1)</sup>), if k &ge; 1.
 </br>
+
 * &pi;<sub>ij</sub><sup>(k)</sup> = predecessor of vertex j on a shortest path from vertex i with all intermediate vertices in {1, 2, ..., k}
+
 > &pi;<sub>ij</sub><sup>(k)</sup> =
 >> &pi;<sub>ij</sub><sup>(k-1)</sup>, if d<sub>ij</sub><sup>(k-1)</sup> &le; d<sub>ik</sub><sup>(k-1)</sup> + d<sub>kj</sub><sup>(k-1)</sup>,</br>
 &pi;<sub>kj</sub><sup>(k-1)</sup>, if d<sub>ij</sub><sup>(k-1)</sup> > d<sub>ik</sub><sup>(k-1)</sup> + d<sub>kj</sub><sup>(k-1)</sup>.
